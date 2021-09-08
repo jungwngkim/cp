@@ -23,8 +23,10 @@ int main()
     for (int i = 0; i < n; i++)
     {
         int max_length = 0;
-        for(int j = i-1; j >=0; j--){
-            if(arr[i] > arr[j] && length[j] > max_length) {
+        for (int j = i - 1; j >= 0; j--)
+        {
+            if (arr[i] > arr[j] && length[j] > max_length)
+            {
                 max_length = length[j];
             }
         }
