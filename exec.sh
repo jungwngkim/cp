@@ -1,3 +1,10 @@
-echo $1
-g++ ./src/$1.cc -o ./bin/out -std=gnu++14 -Wall
-./bin/out
+echo "[INFO] compiling '$1.cpp'"
+
+if g++ ./src/$1.cpp -o ./temp/out -std=gnu++14 -Wall; then
+    echo "[INFO] compile success"
+    echo "[INFO] executing '$1.cpp'"
+    ./temp/out
+    rm ./temp/out
+else
+    echo "[ERROR] complie error"
+fi

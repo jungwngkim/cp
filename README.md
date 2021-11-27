@@ -2,10 +2,10 @@
 
 ## Create file & Open in VS Code
 ```
-./start.sh 1000
+./start.sh <problem-number>
 ```
 
-## Compile cpp file & Execute it
+## Compile & Execute
 ```
-./exec.sh 1000
+./exec.sh 1000 <problem-number>
 ```

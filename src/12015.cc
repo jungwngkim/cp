@@ -19,6 +19,8 @@ int main()
         if (pos == L + len + 1)
             len++;
     }
+
     cout << len;
+
     return 0;
 }
