@@ -13,6 +13,6 @@ void add(int k, int x) {
     k += n;
     tree[k] += x;
     for (k /= 2; k >= 1; k /= 2) {
-        tree[k] = tree[2 * k]+tree[2 * k + 1];
+        tree[k] = tree[2 * k] + tree[2 * k + 1];
     }
 }

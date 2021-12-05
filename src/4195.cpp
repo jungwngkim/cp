@@ -3,7 +3,7 @@
 
 using namespace std;
 
-int p[100000], size[100000];
+int p[200000], size[200000];
 
 void create(int x) 
 {
@@ -33,7 +33,7 @@ int main()
     cin.tie(0); ios_base::sync_with_stdio(0);
     int t; cin >> t;
     while(t--)
-    {
+    {        
         map<string, int> m;
         int n; cin >> n;
         while(n--)
@@ -52,6 +52,7 @@ int main()
             }
 
             merge(m[s1], m[s2]);
+
             cout << size[find(m[s1])] << '\n';
         }
     }
