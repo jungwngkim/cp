@@ -7,5 +7,5 @@
 
 ## Compile & Execute
 ```
-./exec.sh 1000 <problem-number>
+./exec.sh <problem-number>
 ```
