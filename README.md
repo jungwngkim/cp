@@ -1,4 +1,4 @@
-# Competitive Programming Solutions for acmicpc.net
+# Competitive Programming Solutions for acmicpc.net (C++)
 
 ## Create file & Open in VS Code
 ```
