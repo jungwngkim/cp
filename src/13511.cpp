@@ -51,7 +51,7 @@ int LCA(int u, int v)
 {
     if(is_ancestor(u, v)) return u;
     if(is_ancestor(v, u)) return v;
-    for(int i = k; i >= 0; i++)
+    for(int i = k; i >= 0; i--)
     {
         if(parent[u][i] && !is_ancestor(parent[u][i], v))
         {
@@ -128,7 +128,6 @@ int main()
         int q, u, v, l, a;
         cin >> q >> u >> v;
         a = LCA(u, v);
-        cout << a << '\n';
         if(q == 1)
         {
             cout << calc_weight(a, u) + calc_weight(a, v) << '\n';
@@ -136,7 +135,7 @@ int main()
         else
         {
             cin >> l;
-            cout << calc_vertex(a, u, v, l) << '\n'; 
+            cout << calc_vertex(a, u, v, l - 1) << '\n'; 
         }
     }
     
