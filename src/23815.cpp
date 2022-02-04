@@ -33,7 +33,7 @@ int main()
     }
 
     if(i < n) cout << "ddong game";
-    else cout << max(a[1][0], a[1][1]);
+    else cout << max(a[0][0], a[0][1]);
 
     return 0;
 }
