@@ -8,10 +8,19 @@ using namespace std;
 
 typedef long long ll;
 
-struct pt { ll x, y; };
+struct pt 
+{ 
+    ll x, y; 
+
+    bool operator<(const pt &p) const
+    {
+        if(x == p.x) return y < p.y;
+        else return x < p.x;
+    }
+};
 
 int n;
-pt a[N];
+pt p[N];
 
 ll dist(pt a, pt b)
 {
@@ -34,23 +43,21 @@ int main()
     ios_base::sync_with_stdio(0);
 
     cin >> n;
-    for(int i = 0; i < n; i++) cin >> a[i].x >> a[i].y;
+    for(int i = 0; i < n; i++) cin >> p[i].x >> p[i].y;
 
-    pt p0 = *min_element(a, a + n, [](const pt &a, const pt &b) {
-        return make_pair(a.y, a.x) < make_pair(b.y, b.x);
-    });
+    swap(p[0], *min_element(p, p + n));
 
-    sort(a, a + n, [&p0](const pt &a, const pt &b) {
-        ll v = cross(p0, a, b);
+    sort(p + 1, p + n, [](const pt &a, const pt &b) {
+        ll v = cross(p[0], a, b);
         if(v) return v < 0;
-        else return dist(p0, a) < dist(p0, b);
+        else return dist(p[0], a) < dist(p[0], b);
     });
 
     vector<pt> v;
     for(int i = 0; i < n; i++)
     {
-        while(v.size() > 1 && !cw(v[v.size() - 2], v.back(), a[i])) v.pop_back();
-        v.push_back(a[i]);
+        while(v.size() > 1 && !cw(v[v.size() - 2], v.back(), p[i])) v.pop_back();
+        v.push_back(p[i]);
     }
 
     cout << v.size();
