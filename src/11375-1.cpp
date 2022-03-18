@@ -4,17 +4,17 @@
 
 using namespace std;
 
-int n, m, cnt;
+int n, m, count;
 int mt[1001];
 bool visited[1001];
-vector<int> adj[1001];
+vector<vector<int>> adj;
 
-bool dfs(int u)
+bool dfs(int &u)
 {
     if(visited[u]) return false;
     visited[u] = true;
 
-    for(int v : adj[u])
+    for(int v : adj[u]) 
     {
         if(!mt[v])
         {
@@ -23,7 +23,7 @@ bool dfs(int u)
         }
     }
 
-    for(int v : adj[u])
+    for(int v : adj[u]) 
     {
         if(dfs(mt[v]))
         {
@@ -41,27 +41,25 @@ int main()
     ios_base::sync_with_stdio(0);
 
     cin >> n >> m;
-    
-    int t, v;
+    adj.resize(n + 1);
     for(int u = 1; u <= n; u++)
     {
+        int t;
         cin >> t;
-        while(t--)
+        adj[u].resize(t);
+        for(int &v : adj[u])
         {
             cin >> v;
-            adj[u].push_back(v);
         }
     }
 
     for(int u = 1; u <= n; u++)
     {
-        memset(visited, false, sizeof(bool) * (n + 1));
-        if(dfs(u)) cnt++;
-        memset(visited, false, sizeof(bool) * (n + 1));
-        if(dfs(u)) cnt++;
+        memset(visited, false, sizeof(visited));
+        if(dfs(u)) count++;
     }
     
-    cout << cnt;
-
+    cout << count;
+    
     return 0;
 }
