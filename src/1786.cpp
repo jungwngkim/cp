@@ -33,7 +33,7 @@ void search(string &t, string &p, vector<int> &res)
 
 int main()
 {
-    cin.tie(0); cout.tie(0);
+    cin.tie(0);  
     ios_base::sync_with_stdio(0);
 
     string t, p;

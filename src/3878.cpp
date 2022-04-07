@@ -31,7 +31,7 @@ bool 1d_intersect(int x1, int x2, int x3)
 
 int main()
 {
-    cin.tie(0); cout.tie(0);
+    cin.tie(0);  
     ios_base::sync_with_stdio(0);
 
     cin >> t;

@@ -43,7 +43,7 @@ ll cross(pt p1, pt p2, pt p3)
 
 int main()
 {
-    cin.tie(0); cout.tie(0);
+    cin.tie(0);  
     ios_base::sync_with_stdio(0);
 
     cin >> t;

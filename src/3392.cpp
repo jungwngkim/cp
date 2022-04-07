@@ -39,7 +39,7 @@ void update(int v, int tl, int tr, int l, int r, int inc)
 
 int main()
 {
-    cin.tie(0); cout.tie(0);
+    cin.tie(0);  
     ios_base::sync_with_stdio(0);
 
     cin >> n;

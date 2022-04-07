@@ -29,7 +29,7 @@ void dfs(int u, int depth, int &idx)
 
 int main()
 {
-    cin.tie(0); cout.tie(0);
+    cin.tie(0);  
     ios_base::sync_with_stdio(0);
 
     lg[1] = 0;
