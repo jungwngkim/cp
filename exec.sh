@@ -1,6 +1,6 @@
 echo "[INFO] compiling '$1.cpp'"
 
-if g++ ./src/$1.cpp -o ./temp/out -std=c++14 -Wall; then
+if g++ ./src/$1.cpp -o ./temp/out -std=c++17 -Wall; then
     echo "[INFO] compile success"
     echo "[INFO] executing '$1.cpp'"
     ./temp/out
