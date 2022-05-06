@@ -3,10 +3,33 @@
 
 using namespace std;
 
-struct Country { int g, s, b, idx; };
+struct Country 
+{ 
+    int g, s, b, idx; 
+
+    bool operator<(const Country &c) const 
+    {
+        if(g == c.g) {
+            if(s == c.s) {
+                return b > c.b;
+            }
+            else {
+                return s > c.s;
+            }
+        }
+        else {
+            return g > c.g;
+        }
+    }
+
+    bool operator==(const Country &c) const 
+    {
+        return g == c.g && s == c.s && b == c.b;
+    }
+};
 
 int n, k;
-int rank[1001];
+int r[1001];
 Country c[1001];
 
 int main()
@@ -21,21 +44,26 @@ int main()
     }
 
     sort(c, c + n);
+
+    // for(int i = 0; i < n; i++)
+    // {
+    //     cout << c[i].g << c[i].s << c[i].b << '\n';
+    // }
     
-    rank[c[0].idx] = 1;
+    r[c[0].idx] = 1;
     for(int i = 1; i < n; i++)
     {
-        if(c[i - 1].g == c[i].g && c[i - 1].s == c[i].s && c[i - 1].b == c[i].b)
+        if(c[i - 1] == c[i])
         {
-            rank[c[i].idx] = rank[c[i - 1].idx];
+            r[c[i].idx] = r[c[i - 1].idx];
         }
         else
         {
-            rank[c[i].idx] = i + 1;
+            r[c[i].idx] = i + 1;
         }
     }
 
-    cout << rank[k];
+    cout << r[k];
 
     return 0;
 }

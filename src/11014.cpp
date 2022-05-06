@@ -52,18 +52,18 @@ int main()
     cin >> t;
     while(t--)
     {
-        for(vector<int> adj_i : adj) adj_i.clear();
+        for(int i = 0; i < N * N; i++) adj[i].clear();
 
         cin >> n >> m;
 
-        int bcnt = 0;
+        bcnt = 0;
         for(int y = 0; y < n; y++)
         {
+            string s;
+            cin >> s;
             for(int x = 0; x < m; x++)
             {
-                char c;
-                cin >> c;
-                b[y][x] = (c == '.');
+                b[y][x] = s[x] == '.';
                 if(b[y][x]) bcnt++;
             }
         }
@@ -73,6 +73,7 @@ int main()
             for(int x = 0; x < m; x += 2)
             {
                 if(!b[y][x]) continue;
+
                 for(int i = 0; i < 6; i++)
                 {
                     int ny = y + dy[i], nx = x + dx[i];
@@ -84,13 +85,14 @@ int main()
         }
 
         memset(mt, -1, sizeof(mt));
-        int cnt = 0;
+        memset(visited, false, sizeof(visited));
+
+        cnt = 0;
         for(int y = 0; y < n; y++)
         {
             for(int x = 0; x < m; x += 2)
             {
                 if(!b[y][x]) continue;
-                memset(visited, false, sizeof(visited));
                 if(dfs(u(y, x))) cnt++;
             }
         }
