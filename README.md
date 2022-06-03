@@ -1,11 +1,18 @@
-# Competitive Programming Solutions for acmicpc.net (C++)
+# Competitive Programming Solutions (C++)
 
-## Create file & Open in VS Code
+## How to use
+
+### Create file & Open in VS Code
 ```
 ./start.sh <problem-number>
 ```
 
-## Compile & Execute
+### Compile & Execute
 ```
 ./exec.sh <problem-number>
 ```
+
+## List of Online Judges
+
+- atcoder: [AtCoder](https://atcoder.jp/)
+- boj: [Baekjoon Online Judge](https://www.acmicpc.net/)
