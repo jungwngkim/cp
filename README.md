@@ -1,4 +1,4 @@
-# Competitive Programming Solutions (C++)
+# Competitive Programming Solutions (C/C++/Python)
 
 ## How to use
 
