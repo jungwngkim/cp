@@ -1,31 +1,40 @@
+#include <algorithm>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
-int n, max_val;
+int n;
 int a[100];
 
-int main()
-{
-    cin.tie(0); ios_base::sync_with_stdio(0);
+int gcd(int a, int b) {
+    if(a < b) swap(a, b);
+    
+    if (b == 0)
+        return a;
+    else
+        return gcd(b, a % b);
+}
+
+int main() {
+    cin.tie(0);
+    ios_base::sync_with_stdio(0);
 
     cin >> n;
-    for(int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         cin >> a[i];
-        max_val = max(max_val, a[i]);
+    }
+    sort(a, a + n);
+
+    int gcd_all = 0;
+    for (int i = 1; i < n; i++) {
+        gcd_all = gcd(a[i] - a[i - 1], gcd_all);
     }
 
-    for(int MOD = 2; MOD <= max_val; MOD++) {
-        bool ok = true;
-        int z = a[0] % MOD;
-        for(int i = 1; i < n; i++) {
-            if(z != a[i] % MOD) {
-                ok = false;
-                break;
-            }
-        }
-        if(ok) cout << MOD << ' ';
+    for(int i = 2; i <= gcd_all / 2; i++) {
+        if(!(gcd_all % i)) cout << i << ' ';
     }
-    
+    cout << gcd_all;
+
     return 0;
 }
