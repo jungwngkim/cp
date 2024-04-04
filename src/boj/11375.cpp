@@ -46,7 +46,7 @@ int max_flow(int s, int t)
     int flow = 0, new_flow;
     vector<int> p(n + m + 2);
 
-    while((new_flow = bfs(s, t, p)))
+    while(new_flow = bfs(s, t, p))
     {
         flow += new_flow;
 

@@ -1,53 +1,45 @@
 #include <iostream>
-#include <vector>
-#include <algorithm>
+#include <cstring>
 
 using namespace std;
 
-int a[50];
-bool dp[500001];
-long long bdp[500001];
-vector<int> b, c;
-int n, ans;
-
-bool uniq(int a1, int a2)
-{
-    return !(bdp[a1] & bdp[a2]);
-}
+int n, a[50], dp[50][500001];
 
 int main()
 {
-    cin.tie(0);  
+    cin.tie(0);
     ios_base::sync_with_stdio(0);
 
     cin >> n;
-    for(int i = 0; i < n; i++) cin >> a[i];
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    memset(dp, -1, sizeof(dp));
 
-    dp[0] = true;
-    b.push_back(0);
-    for(int i = 0; i < n; i++)
-    {
-        for(int &b_i : b)
-        {
-            if(dp[a[i] + b_i]) 
-            {
-                ans = max(ans, a[i] + b_i);
-            }
-            else
-            {
-                if(uniq(a[i], b_i))
-                {
-                    dp[a[i] + b_i] = true;
-                    c.push_back(a[i] + b_i);
-                }
-            }
+    dp[0][0] = 0;
+    dp[0][a[0]] = a[0];
+
+    for (int i = 1, p, h; i < n; i++) {
+        for (int d = 0; d <= 500000; d++) {
+            if (dp[i - 1][d] == -1) continue;
+
+            p = dp[i - 1][d];
+            h = a[i];
+
+            // no use
+            dp[i][d] = max(dp[i][d], p);
+
+            // smaller tower
+            if (d - h >= 0) dp[i][d - h] = max(dp[i][d - h], p);
+            else dp[i][h - d] = max(dp[i][h - d], p + h - d);
+
+            // taller tower
+            if (d + h <= 500000) dp[i][d + h] = max(dp[i][d + h], p + h);
         }
-        b.insert(b.end(), c.begin(), c.end());
-        c.clear();
     }
 
-    if(ans) cout << ans;
-    else cout << -1;
-    
+    cout << (dp[n - 1][0] ? dp[n - 1][0] : -1);
+
     return 0;
 }
