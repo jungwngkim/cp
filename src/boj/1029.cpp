@@ -1,33 +1,27 @@
 #include <iostream>
+#include <cstring>
 
-#define N 16
+#define MAX 0x3f3f3f3f
 
 using namespace std;
 
-int n, ans;
-int w[N][N];
-bool visited[N];
+int n;
+int dp[1 << 16][15][10], w[15][15];
 
-void dfs(int u, int p, int cnt)
-{
-    int ccnt = 0;
-    for(int v = 1; v <= n; v++)
-    {
-        if(v == u) continue;
+int calc(int b, int u, int v) {
+    int &m = dp[b][u][v];
 
-        if(!visited[v] && w[u][v] >= w[p][u]) 
-        {
-            ccnt++;
-            visited[v] = true;
-            dfs(v, u, cnt + 1);
-            visited[v] = false;
-        }
+    if (m != -1) return m;
+
+    m = 1;
+
+    for (int i = 1; i < n; i++) {
+        if (w[u][i] < v) continue;
+        if (b & (1 << i)) continue;
+        m = max(m, calc(b | (1 << i), i, w[u][i]) + 1);
     }
-    
-    if(!ccnt)
-    {
-        ans = max(ans, cnt);
-    }
+
+    return m;
 }
 
 int main()
@@ -36,16 +30,15 @@ int main()
     ios_base::sync_with_stdio(0);
 
     cin >> n;
-    for(int i = 1; i <= n; i++) for(int j = 1; j <= n; j++) {
-        char c; 
+    for(int i = 0; i < n; i++) for(int j = 0; j < n; j++) {
+        char c;
         cin >> c;
         w[i][j] = c - '0';
     }
 
-    visited[1] = true;
-    dfs(1, 0, 1);
+    memset(dp, -1, sizeof(dp));
 
-    cout << ans;
-    
+    cout << calc(1, 0, 0);
+
     return 0;
 }
