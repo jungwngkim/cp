@@ -1,19 +1,57 @@
-int sum(int k) {
-    int s = 0;
-    while(k >= 1) {
-        s += t[k];
-        k -= k & -k;
-    }
-    return s;
-}
+#include <vector>
 
-int sum(int a, int b) {
-    return sum(b) - sum(a - 1);
-}
+typedef long long ll;
 
-void add(int k, int x) {
-    while(k <= n) {
-        t[k] += x;
-        k += k & -k;
-    }
-}
+// 1..n (1 indexed fenwick tree - only update)
+class Fenwick {
+    private:
+        int s;
+        vector<ll> fw;
+    public:
+        Fenwick(int _s) : s(_s), fw(_s + 1) {}
+
+        void update(int pos, ll inc) {
+            for (; pos <= s; pos += pos & -pos) {
+                fw[pos] += inc;
+            }
+        }
+
+        ll query(int pos) {
+            ll res = 0;
+            for (; pos > 0; pos -= pos & -pos) {
+                res += fw[pos];
+            }
+            return res;
+        }
+};
+
+// 0 indexed fenwick tree, support of set
+class Fenwick {
+    private:
+        int s;
+        vector<ll> arr;
+        vector<ll> fw;
+    public:
+        Fenwick(int _s) : s(_s), arr(_s), fw(_s + 1) {}
+
+        void update(int pos, ll inc) {
+            arr[pos] += inc;
+            pos++;
+            for (; pos <= s; pos += pos & -pos) {
+                fw[pos] += inc;
+            }
+        }
+
+        ll query(int pos) {
+            pos++;
+            ll res = 0;
+            for (; pos > 0; pos -= pos & -pos) {
+                res += fw[pos];
+            }
+            return res;
+        }
+
+        void set(int pos, int val) {
+            update(pos, val - arr[pos]);
+        }
+};

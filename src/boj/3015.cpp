@@ -1,5 +1,5 @@
 #include <iostream>
-#include <queue>
+#include <stack>
 
 using namespace std;
 
@@ -7,20 +7,36 @@ int main() {
     cin.tie(0);
     ios_base::sync_with_stdio(0);
 
-    queue<int> q;
-    int n, x, ans = 0;
+    stack<pair<int, long long>> s;
+    int n, x;
+    long long ans = 0;
 
     cin >> n;
 
     while (n--) {
         cin >> x;
-        if (!q.size()) {
-            q.push(x);
-            continue;
+        if (!s.size()) {
+            s.push({ x, 1 });
         }
+        else {
+            while (s.size() && s.top().first < x) {
+                ans += s.top().second;
+                s.pop();
+            }
 
-        // 중복 고려하기
-        // 자신이 제일 작은 원소가 될 때까지 q.pop()
+            pair<int, long long> nx = { x, 1 };
+            if (s.size() && s.top().first == x) {
+                nx.second = s.top().second + 1; 
+                ans += s.top().second;
+                s.pop();
+            }
+
+            if (s.size()) {
+                ans++;
+            }
+
+            s.push(nx);
+        }
     }
 
     cout << ans;
